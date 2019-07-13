@@ -11,4 +11,4 @@
 |
 */
 
-Route::post('/','WelcomeController@index');
+Route::get('/','WelcomeController@index');

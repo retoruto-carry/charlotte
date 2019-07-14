@@ -16,8 +16,8 @@ class CreateCardsTable extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
             $table->text('idm');
-            $table->integer('regident_id')->unsigned();
-            $table->foreign('regident_id')->references('id')->on('residents');
+            $table->integer('resident_id')->unsigned();
+            $table->foreign('resident_id')->references('id')->on('residents');
             $table->string('name');
             $table->timestamps();
         });

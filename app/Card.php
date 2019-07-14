@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Card extends Model
 {
-    public function cards(){
-        return $this->hasMany('App\Card');
+    public function resident(){
+        return $this->belongsTo('App\Resident');
     }
 }

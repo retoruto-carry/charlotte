@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIDmRegistryHistoryTable extends Migration
+class CreateUnknownIdmTouchHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateIDmRegistryHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('_i_dm_registry_history', function (Blueprint $table) {
+        Schema::create('unknown_idm_touch_histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('IDm');
+            $table->text('idm');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateIDmRegistryHistoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_i_dm_registry_history');
+        Schema::dropIfExists('unknown_idm_touch_histories');
     }
 }

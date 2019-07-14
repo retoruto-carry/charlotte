@@ -17,7 +17,7 @@ class ResidentResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'tweetBodies' => CardResource::collection($this->cards),
+            'cards' => CardResource::collection($this->cards),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

@@ -69,6 +69,7 @@ class ResidentsController extends Controller
      * @param int $id
      * @return array
      */
+    // FIXME cardsも消す必要がある
     public function destroy($id)
     {
         $resident = Resident::find($id);

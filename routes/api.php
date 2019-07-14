@@ -13,5 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('last-unknown-touch-idm', 'CardsController@lastUnknownTouchIdm');
 Route::resource('residents', 'ResidentsController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 Route::resource('residents.cards', 'CardsController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);

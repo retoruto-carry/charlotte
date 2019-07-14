@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Card;
+use App\UnknownIdmTouchHistory;
 use App\Http\Resources\CardResource;
+use App\Http\Resources\UnknownIdmTouchHistoryResource;
 
 class CardsController extends Controller
 {
@@ -52,8 +54,8 @@ class CardsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -64,11 +66,23 @@ class CardsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * 直近でタッチされた未登録のカード情報を取得する
+     *
+     * @return UnknownIdmTouchHistoryResource
+     */
+    public function lastUnknownTouchIdm()
+    {
+        $lastUnknownTouchIdm = UnknownIdmTouchHistory::orderBy('id', 'desc')->first();
+        return new UnknownIdmTouchHistoryResource($lastUnknownTouchIdm);
+
     }
 }

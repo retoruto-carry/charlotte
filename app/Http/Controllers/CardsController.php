@@ -8,6 +8,7 @@ use App\Card;
 use App\UnknownIdmTouchHistory;
 use App\Http\Resources\CardResource;
 use App\Http\Resources\UnknownIdmTouchHistoryResource;
+use Illuminate\Http\Response;
 
 class CardsController extends Controller
 {
@@ -34,7 +35,7 @@ class CardsController extends Controller
         $card = new Card;
         $card->resident_id = $residentId;
         $card->name = $request->name;
-        $card->idm = $this->lastUnknownTouchIdm();
+        $card->idm = UnknownIdmTouchHistory::orderBy('id', 'desc')->first();
         $card->save();
 
         return new CardResource($card);
@@ -56,7 +57,7 @@ class CardsController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -66,12 +67,14 @@ class CardsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param Card $card
+     * @return array
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(int $residentId, Card $card)
     {
-        //
+        $card->delete();
+        return ['result' => 'success'];
     }
 
 

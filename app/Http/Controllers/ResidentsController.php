@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 
 use App\Resident;
@@ -66,14 +67,22 @@ class ResidentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param Resident $resident
      * @return array
+     * @throws \Exception
      */
-    // FIXME cardsも消す必要がある
-    public function destroy($id)
+    public function destroy(Resident $resident)
     {
-        $resident = Resident::find($id);
-        $resident->delete();
+        DB::transaction(function () use ($resident) {
+            $cards = $resident->cards;
+            foreach ($cards as $card) {
+                $card->delete();
+            }
+
+            $resident->delete();
+        });
+
         return ['result' => 'success'];
+
     }
 }

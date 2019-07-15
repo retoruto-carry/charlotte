@@ -33,8 +33,8 @@ class CardsController extends Controller
     {
         $card = new Card;
         $card->resident_id = $residentId;
-        $card->idm = $request->idm;
         $card->name = $request->name;
+        $card->idm = $this->lastUnknownTouchIdm();
         $card->save();
 
         return new CardResource($card);
@@ -74,15 +74,15 @@ class CardsController extends Controller
         //
     }
 
+
     /**
      * 直近でタッチされた未登録のカード情報を取得する
      *
-     * @return UnknownIdmTouchHistoryResource
+     * @return string
      */
-    public function lastUnknownTouchIdm()
+    private function lastUnknownTouchIdm()
     {
-        $lastUnknownTouchIdm = UnknownIdmTouchHistory::orderBy('id', 'desc')->first();
-        return new UnknownIdmTouchHistoryResource($lastUnknownTouchIdm);
-
+        return UnknownIdmTouchHistory::orderBy('id', 'desc')->first()->idm;
     }
+
 }

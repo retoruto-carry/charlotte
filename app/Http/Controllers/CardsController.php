@@ -83,7 +83,7 @@ class CardsController extends Controller
      *
      * @return string
      */
-    private function lastUnknownTouchIdm()
+    public function lastUnknownTouchIdm()
     {
         return UnknownIdmTouchHistory::orderBy('id', 'desc')->first()->idm;
     }

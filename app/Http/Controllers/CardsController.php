@@ -33,8 +33,8 @@ class CardsController extends Controller
     {
         $card = new Card;
         $card->resident_id = $residentId;
-        $card->idm = $request->idm;
         $card->name = $request->name;
+        $card->idm = UnknownIdmTouchHistory::orderBy('id', 'desc')->first();
         $card->save();
 
         return new CardResource($card);
